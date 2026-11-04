@@ -128,31 +128,14 @@
 
   <script>
     // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMfyXmT8j6GIOIfrqYNc99ByQsx0dj0UAa47q8XKTVLx-T30Pxkv_TrBG56vXbfBzd/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHQC5BsiL5MtMX87kDK8eCbWYVBjy7qNfaU15qjHP6MdLpyZ2KkVm_b2AaS3aki1Pl/exec";
 
     function sendRating(ratingText) {
       // 1. Tampilkan layar Terima Kasih langsung tanpa delay
       document.getElementById("survey-box").style.display = "none";
       document.getElementById("thank-you").style.display = "block";
 
-
-fetch("https://script.google.com/macros/s/AKfycbzMfyXmT8j6GIOIfrqYNc99ByQsx0dj0UAa47q8XKTVLx-T30Pxkv_TrBG56vXbfBzd/exec", {
-  method: "POST",
-  headers: { "Content-Type": "text/plain;charset=utf-8" }, // text/plain menghindari isu CORS preflight
-  body: JSON.stringify({
-    nama: "Budi",
-    email: "budi@example.com",
-    pesan: "Halo dari web app!"
-  })
-})
-.then(res => res.json())
-.then(res => console.log(res))
-.catch(err => console.error(err));
-
-
-
-
-      
+       
 
       // 2. Kirim data ke Google Sheets di latar belakang
      // fetch(SCRIPT_URL, {
