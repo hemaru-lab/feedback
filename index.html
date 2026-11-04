@@ -131,7 +131,7 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYgk3bqTjIY7VqwOs8CDIFrywpVs8H8dMmW12Z3Aunh6plr66byaFHkvgY3CqUqdgz/exec";
     let isSubmitting = false;
 
-    function sendRating(RatingText) {
+    function sendRating(ratingText) {
       if (isSubmitting) return; // Mencegah double tap cepat
       isSubmitting = true;
 
@@ -146,7 +146,7 @@
         headers: {
           "Content-Type": "text/plain;charset=utf-8"
         },
-        body: JSON.stringify({ Rating: RatingText }),
+        body: JSON.stringify({ rating: ratingText }),
         redirect: "follow"
       })
       .then(res => res.json())
