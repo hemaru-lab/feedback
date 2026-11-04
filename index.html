@@ -124,45 +124,39 @@
   <div id="thank-you">
     <h2>Terima Kasih! 🙏</h2>
     <p>Masukan Anda sangat berarti untuk kemajuan rasa dan layanan kami.</p>
-  </div>
-
-  <script>
-       // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
+  </div><script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYgk3bqTjIY7VqwOs8CDIFrywpVs8H8dMmW12Z3Aunh6plr66byaFHkvgY3CqUqdgz/exec";
+    let isSubmitting = false;
 
     function sendRating(ratingText) {
-      // 1. Tampilkan layar Terima Kasih langsung tanpa delay
+      if (isSubmitting) return; // Mencegah double tap cepat
+      isSubmitting = true;
+
+      // 1. Tampilkan layar terima kasih
       document.getElementById("survey-box").style.display = "none";
       document.getElementById("thank-you").style.display = "block";
 
-       
-
-      // 2. Kirim data ke Google Sheets di latar belakang
-     fetch(SCRIPT_URL, {
+      // 2. Kirim data ke Google Sheets
+      // Menggunakan text/plain agar terbebas dari blokir preflight CORS browser
+      fetch(SCRIPT_URL, {
         method: "POST",
-       mode: "no-cors",
-       headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rating: ratingText })
-   }).catch(err => console.error("Gagal mencatat:", err));
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({ rating: ratingText }),
+        redirect: "follow"
+      })
+      .then(res => res.json())
+      .then(data => console.log("Berhasil:", data))
+      .catch(err => console.error("Gagal mencatat:", err));
 
-
-// fetch(SCRIPT_URL, {
-//  method: "POST",
-//  headers: {
-//    "Content-Type": "text/plain;charset=utf-8"
- // },
- // body: JSON.stringify({ rating: ratingText })
-// })
-  // .catch(err => console.error("Gagal mengirim:", err));
-      
-
-      // 3. Reset kembali ke tampilan awal dalam 2.5 detik
+      // 3. Reset kembali ke tampilan awal setelah 2.5 detik
       setTimeout(() => {
         document.getElementById("thank-you").style.display = "none";
         document.getElementById("survey-box").style.display = "block";
+        isSubmitting = false;
       }, 2500);
     }
-
   </script>
 </body>
 </html>
