@@ -138,22 +138,22 @@
        
 
       // 2. Kirim data ke Google Sheets di latar belakang
-     // fetch(SCRIPT_URL, {
-      //  method: "POST",
-       // mode: "no-cors",
-      //  headers: { "Content-Type": "application/json" },
-      //  body: JSON.stringify({ rating: ratingText })
-    //  }).catch(err => console.error("Gagal mencatat:", err));
+     fetch(SCRIPT_URL, {
+        method: "POST",
+       mode: "no-cors",
+       headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rating: ratingText })
+   }).catch(err => console.error("Gagal mencatat:", err));
 
 
-fetch(SCRIPT_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "text/plain;charset=utf-8"
-  },
-  body: JSON.stringify({ rating: ratingText })
-})
-  .catch(err => console.error("Gagal mengirim:", err));
+// fetch(SCRIPT_URL, {
+//  method: "POST",
+//  headers: {
+//    "Content-Type": "text/plain;charset=utf-8"
+ // },
+ // body: JSON.stringify({ rating: ratingText })
+// })
+  // .catch(err => console.error("Gagal mengirim:", err));
       
 
       // 3. Reset kembali ke tampilan awal dalam 2.5 detik
